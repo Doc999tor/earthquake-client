@@ -6,35 +6,29 @@ import { BACKEND_PATH } from './constants-service'
 interface AppState {
   minmagnitude: number,
   count: number,
-
-  starttimeRef: React.Ref<HTMLInputElement>
-  endtimeRef: React.Ref<HTMLInputElement>
-  minmagnitudeRef: React.Ref<HTMLInputElement>
-  latitudeRef: React.Ref<HTMLInputElement>
-  longitudeRef: React.Ref<HTMLInputElement>
-  maxradiuskmRef: React.Ref<HTMLInputElement>
 }
 class App extends React.Component<null, AppState>  {
   state: AppState = {
     minmagnitude: 0,
     count: 0,
-
-    starttimeRef: React.createRef(),
-    endtimeRef: React.createRef(),
-    minmagnitudeRef: React.createRef(),
-    latitudeRef: React.createRef(),
-    longitudeRef: React.createRef(),
-    maxradiuskmRef: React.createRef(),
   }
-  getApiData = e  => {
+
+  starttimeRef = React.createRef<HTMLInputElement>();
+  endtimeRef = React.createRef<HTMLInputElement>();
+  minmagnitudeRef = React.createRef<HTMLInputElement>();
+  latitudeRef = React.createRef<HTMLInputElement>();
+  longitudeRef = React.createRef<HTMLInputElement>();
+  maxradiuskmRef = React.createRef<HTMLInputElement>();
+
+  getApiData = (e: React.FormEvent<HTMLFormElement>)  => {
     e.preventDefault()
 
-    const starttime = this.state.starttimeRef.current.value
-    const endtime = this.state.endtimeRef.current.value
-    const minmagnitude = this.state.minmagnitudeRef.current.value
-    const latitude = this.state.latitudeRef.current.value
-    const longitude = this.state.longitudeRef.current.value
-    const maxradiuskm = this.state.maxradiuskmRef.current.value
+    const starttime = this!.starttimeRef!.current!.value
+    const endtime = this!.endtimeRef!.current!.value
+    const minmagnitude = this!.minmagnitudeRef!.current!.value
+    const latitude = this!.latitudeRef!.current!.value
+    const longitude = this!.longitudeRef!.current!.value
+    const maxradiuskm = this!.maxradiuskmRef!.current!.value
 
     const queryParams = serializeQueryString({
       starttime,
@@ -55,12 +49,12 @@ class App extends React.Component<null, AppState>  {
     return (
       <>
         <form onSubmit={ this.getApiData }>
-          <input type="text" name="starttime" ref={ this.state.starttimeRef } />
-          <input type="text" name="endtime" ref={ this.state.endtimeRef } />
-          <input type="text" name="minmagnitude" ref={ this.state.minmagnitudeRef } />
-          <input type="text" name="latitude" ref={ this.state.latitudeRef } />
-          <input type="text" name="longitude" ref={ this.state.longitudeRef } />
-          <input type="text" name="maxradiuskm" ref={ this.state.maxradiuskmRef } />
+          <input type="text" name="starttime" ref={ this.starttimeRef } />
+          <input type="text" name="endtime" ref={ this.endtimeRef } />
+          <input type="text" name="minmagnitude" ref={ this.minmagnitudeRef } />
+          <input type="text" name="latitude" ref={ this.latitudeRef } />
+          <input type="text" name="longitude" ref={ this.longitudeRef } />
+          <input type="text" name="maxradiuskm" ref={ this.maxradiuskmRef } />
 
           <input type="submit" />
         </form>
